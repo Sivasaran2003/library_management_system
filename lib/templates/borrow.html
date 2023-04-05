@@ -1,0 +1,23 @@
+{%bock content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>BORROWING A BOOK</h1>
+    <form action="borrow" method = "POST">
+        USER ID : <input type="number" name ="userid"><p>
+        BOOK ID : <input type="number" name = "isbn"><p>
+        {%csrf_token%}
+        <input type="submit" value = "register">
+    </form>
+    <p>
+    <a href="users">see users</a>
+</body>
+</html>
+{%endblock%}

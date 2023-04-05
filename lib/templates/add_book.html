@@ -1,0 +1,26 @@
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="add_book" method = "POST">
+        ISBN : <input type="number" name="isbn"><p>
+        TITLE : <input type="text" name="title"><p>
+        PRICE : <input type="number" name = "price"><p>
+        PUBLISHED YEAR : <input type="text" name = "year"><p>
+        PUBLISHER ID : <input type="number" name = "pubid"><p>
+        PUBLISHER : <input type="text" name = "publisher"><p>
+        AUTHOR : <input type="text" name = "author"><p>
+        CATEGORY : <input type="text" name = "category"><p>
+        AVAILABLE : <input type="number" name= "available"><p>
+        {%csrf_token%}
+        <input type="submit">
+    </form>
+</body>
+</html>
+{%endblock%}

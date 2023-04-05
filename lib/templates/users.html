@@ -1,0 +1,44 @@
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <th>
+        <td>USER ID</td>
+        <td>USER NAME</td>
+        <td>CONTACT NUMBER</td>
+        <td>NUMBER OF BOOKS BORROWED</td>
+        {%for i in data%}
+        <tr>
+            <td></td>
+            <td>{{i.0}}</td>
+            <td>{{i.1}}</td>
+            <td>{{i.2}}</td>
+            <td>{{i.3}}</td>
+          </tr>
+          {%endfor%}
+    </table> <p>
+        
+        <table>
+            <th>
+            <td>USER ID</td>
+            <td>ISBN NUMBER</td>
+            <td>DUE DATE</td>
+            {%for i in borrowed%}
+            <tr>
+                <td></td>
+                <td>{{i.0}}</td>
+                <td>{{i.1}}</td>
+                <td>{{i.2}}</td>
+              </tr>
+              {%endfor%}
+        </table>   
+</body>
+</html>
+{%endblock%}
