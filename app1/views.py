@@ -100,8 +100,11 @@ def borrow(request):
         userid = request.POST.get('userid',False)
         isbn = request.POST.get('isbn',False)
         duedate = date.today() + timedelta(days = 15)
-        
-        c.execute("insert into borrowed values('"+userid+"','"+isbn+"','"+duedate+"')")
+        c.execute("select available from available where isbn = '"+isbn+"'")
+        avail = int(c.fetchall())
+        if(avail > 0):
+           c.execute("insert into borrowed values('"+userid+"','"+isbn+"','"+duedate+"')")
+           c.execute("update available set available = available - 1 where isbn = '"+isbn+"'")
     return render(request,'borrow.html')
 
 def return_book(request):
@@ -117,9 +120,13 @@ def return_book(request):
         else :
            fine = 0
         c.execute("delete from borrowed where userid = '"+userid+"' and isbn = '"+isbn+"')
+        c.execute("update available set available = available + 1 where isbn = '"+isbn+"'")
     return render(request,'return_book.html')
         
-
+def update(request):
+    if(request.method == 'POST'):
+        
+                  
 def users(request):
     d = {}
     c.execute("select * from users")
