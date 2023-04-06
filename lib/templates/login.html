@@ -1,21 +1,48 @@
 {%block content%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
 </head>
 <body>
-
-    <h1>LOGIN PAGE</h1>
-    <form action="" method = "POST">
+    <style>
+        div{
+            margin-top: 100px;
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            color: rgb(245, 212, 179);
+            font-family: sans-serif;
+            font-weight: bold;
+            padding: 30px;
+            border-radius: 17px;
+        }
+        #lib{
+            margin-left: 300px;
+        }
+        #log{
+            background-color: black;
+            margin-left: 200px;
+        }
+    </style>
+    <div>
+        <div id = "lib"><h1>PSG LIBRARY</h1></div>
+        <div>
+    <form action="" method = "POST" id="log">
+        <h1>LOGIN PAGE</h1>
         user name : <input type="text" name = "user"><p>
         password : <input type="password" name = "pwd"><p>
         {%csrf_token%}
         <input type="submit">
+        </div>
     </form>
+    </div>
     
 </body>
 </html>

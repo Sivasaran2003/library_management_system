@@ -57,9 +57,8 @@ def add_book(request):
             if int(isbn) in i :
                 print('erf')
                 return HttpResponse('<h2>book already exists</h2>')
-        c.execute("select * from publisher")
-        pubs = list(c.fetchall())
 
+        pubs = list(c.fetchall())
         # checking if publisher exists
         f = 1
         for i in pubs :
@@ -78,21 +77,20 @@ def add_book(request):
         query = "insert into available values ('"+isbn+"','"+available+"')"
         print('book inserted')
         c.execute(query)
-        show_books(request)
     return render(request,'add_book.html')
 
-# def delete_book(request):
-#     if request.method == 'POST':
-#         isbn = request.POST.get('isbn')
-#         c.execute("select * from book")
-#         books = list(c.fetchall())
-#         for i in books :
-#             if int(isbn) in list(i) :
-#                 c.execute("delete from book where isbn = "+isbn)
-#                 print('book deleted')
-#                 return render(request,'delete_book.html')
-#         return HttpResponse('<h2>invalid isbn number</h2>')
-#     return render(request,'delete_book.html')
+def delete_book(request):
+    if request.method == 'POST':
+        isbn = request.POST.get('isbn')
+        c.execute("select * from book")
+        books = list(c.fetchall())
+        for i in books :
+            if int(isbn) in list(i) :
+                c.execute("delete from book where isbn = "+isbn)
+                print('book deleted')
+                return render(request,'delete_book.html')
+        return HttpResponse('<h2>invalid isbn number</h2>')
+    return render(request,'delete_book.html')
 
 def borrow(request):
   
@@ -100,36 +98,51 @@ def borrow(request):
         userid = request.POST.get('userid',False)
         isbn = request.POST.get('isbn',False)
         duedate = date.today() + timedelta(days = 15)
-        c.execute("select available from available where isbn = '"+isbn+"'")
-        avail = int(c.fetchall())
+
+        c.execute("select available from available where bookID = '"+isbn+"'")
+        avail = int(c.fetchall()[0][0])
+        print(avail)
         if(avail > 0):
-           c.execute("insert into borrowed values('"+userid+"','"+isbn+"','"+duedate+"')")
-           c.execute("update available set available = available - 1 where isbn = '"+isbn+"'")
+           c.execute("insert into borrowed values('"+userid+"','"+isbn+"','"+str(duedate)+"')")
+           c.execute("update available set available = available - 1 where bookID = '"+isbn+"'")
+
     return render(request,'borrow.html')
 
 def return_book(request):
+    d = {}
     if(request.method == 'POST'):
         userid = request.POST.get('userid',False)
-        isbn = request.POST.get('isbn',False)
-        c.execute("select duedate from borrowed where userid = '"+userid+"' and isbn = '"+isbn+"')
-        duedate = c.fetchall()
+        isbn = request.POST.get('bookid',False)
+        duedate = 0
+        try:
+            q = "select due_date from db.borrowed where userID = "+str(userid)+" and bookID = "+str(isbn)
+            c.execute(q)
+            duedate = c.fetchone()[0]
+            print(duedate)
+        except :
+            return HttpResponse('<h1>invalid userid or isbn number</h1>')
+        # due = datetime.strptime(duedate, '%Y-%m-%d').date()
         current = date.today()
-        fine = current - duedate
+        fine = (current - duedate).days
+        print(fine)
         if fine > 0 :
            fine = 2*fine
         else :
            fine = 0
-        c.execute("delete from borrowed where userid = '"+userid+"' and isbn = '"+isbn+"')
-        c.execute("update available set available = available + 1 where isbn = '"+isbn+"'")
-    return render(request,'return_book.html')
+        print(fine)
+        c.execute("delete from borrowed where userid = "+userid+" and bookID = "+isbn)
+        c.execute("update available set available = available + 1 where bookID = "+isbn)
+        d['user'] = userid
+        d['fine'] = fine
+    return render(request,'return_book.html',d)
         
-def update(request):
-    if(request.method == 'POST'):
+# def update(request):
+#     if(request.method == 'POST'):
         
                   
 def users(request):
     d = {}
-    c.execute("select * from users")
+    c.execute("select * from user")
     users = list(c.fetchall())
     d['data'] = users
     c.execute("select * from borrowed")
