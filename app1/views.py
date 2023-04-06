@@ -1,5 +1,6 @@
 from django.shortcuts import render,HttpResponse
 import mysql.connector
+from datetime import *
 
 mydb = mysql.connector.connect(
         host = "localhost",
@@ -80,52 +81,44 @@ def add_book(request):
         show_books(request)
     return render(request,'add_book.html')
 
-def delete_book(request):
-    if request.method == 'POST':
-        isbn = request.POST.get('isbn')
-        c.execute("select * from book")
-        books = list(c.fetchall())
-        for i in books :
-            if int(isbn) in list(i) :
-                c.execute("delete from book where isbn = "+isbn)
-                print('book deleted')
-                return render(request,'delete_book.html')
-        return HttpResponse('<h2>invalid isbn number</h2>')
-    return render(request,'delete_book.html')
+# def delete_book(request):
+#     if request.method == 'POST':
+#         isbn = request.POST.get('isbn')
+#         c.execute("select * from book")
+#         books = list(c.fetchall())
+#         for i in books :
+#             if int(isbn) in list(i) :
+#                 c.execute("delete from book where isbn = "+isbn)
+#                 print('book deleted')
+#                 return render(request,'delete_book.html')
+#         return HttpResponse('<h2>invalid isbn number</h2>')
+#     return render(request,'delete_book.html')
 
 def borrow(request):
-    u,b = 0,0
+  
     if request.method == 'POST':
         userid = request.POST.get('userid',False)
         isbn = request.POST.get('isbn',False)
-        due = request.POST.get('due',False)
+        duedate = date.today() + timedelta(days = 15)
+        
+        c.execute("insert into borrowed values('"+userid+"','"+isbn+"','"+duedate+"')")
+    return render(request,'borrow.html')
 
-        c.execute("select * from user")
-        users = list(c.fetchall())
-
-        # checking if user exists
-        for i in users:
-            if int(userid) in i :
-                u = 1
-                break
+def return_book(request):
+    if(request.method == 'POST'):
+        userid = request.POST.get('userid',False)
+        isbn = request.POST.get('isbn',False)
+        c.execute("select duedate from borrowed where userid = '"+userid+"' and isbn = '"+isbn+"')
+        duedate = c.fetchall()
+        current = date.today()
+        fine = current - duedate
+        if fine > 0 :
+           fine = 2*fine
+        else :
+           fine = 0
+        c.execute("delete from borrowed where userid = '"+userid+"' and isbn = '"+isbn+"')
+    return render(request,'return_book.html')
         
-        c.execute("select * from book")
-        books = list(c.fetchall())
-
-        # checking if book exists
-        for i in books :
-            if int(isbn) in i :
-                b = 1
-                break
-        
-        if(u and b):
-            c.execute("insert into borrowed values('"+userid+"','"+isbn+"','"+due+"')")
-            c.execute("select num_book from user where userID = "+userid)
-            a = c.fetchall()
-        
-        
-        else:
-            return HttpResponse('<h1>user or book doesnt exists</h1>')
 
 def users(request):
     d = {}
