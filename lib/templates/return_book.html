@@ -8,18 +8,85 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>RETURNING BOOK</h1>
-    <form action="return_book" method = "POST">
-        USER ID : <input type="number" name = "userid"><p>
-        ISBN : <input type="number" name = "bookid"><p>
-            {%csrf_token%}
-        <input type="submit"><p>
-    </form>
-    <a href="users">see users</a><p>
-    <a href="show_books">show books</a>
-    {%if user %}
-    <h1>fine for user {{user}} : {{fine}}</h1>
-    {%endif%}
+    <style>
+        body{
+        background-color: black;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .btn:hover{
+        color: black;
+        border: 1px solid black;
+        background-color: rgb(204, 197, 197);
+    }
+        #fine{
+            background-color: red;
+            width: 500px;
+            padding: 20px 20px;
+            color: white;
+            border-radius: 5px;
+            margin-left: 580px;
+            text-align: center;
+        }
+        #div1{
+            border: 2px solid rgb(42, 32, 32);
+            border-radius: 10px;
+            width: 500px;
+            text-align: center;
+            margin-bottom: 40px;
+            margin-left: 600px;
+            background-color:orange;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+            font-size: large;
+            color: white;
+        }
+        .link{
+            margin-left: 183px;
+            padding: 20px 20px;
+            background-color: green;
+            width: 100px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .inputs{
+            font-size: 15px;
+            font-size: large;
+            padding: 12px;
+        }
+        .btn{
+            border:none;
+            background-color: black;
+            color: white;
+            border-radius:50px;
+            padding: 15px 50px;
+            font-weight: bold;
+            font-size: large;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        p{
+            font-size: larger;
+        }
+    </style>
+    <div id = "div1">
+        <h1>RETURNING BOOK</h1>
+        <form action="return_book" method = "POST">
+            <p>USER ID :</p> <input type="number" class = "inputs"name = "userid"><p>
+            <p>ISBN :</p> <input type="number" class = "inputs"name = "bookid"><p>
+                {%csrf_token%}
+            <input class = "btn"type="submit" value = "OK"><p>
+        </form>
+        <div class = "link"><a href="users">SEE USERS</a></div><p>
+        <div class = "link"><a href="show_books">SHOW BOOKS</a></div>
+        {%if user %}
+        
+        {%endif%}
+   </div>
+   <h1 id = "fine">fine for user {{user}} : {{fine}}</h1>
 </body>
 </html>
 {%endblock%}

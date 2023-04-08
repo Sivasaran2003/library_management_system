@@ -12,34 +12,70 @@
 </head>
 <body>
     <style>
+        #div2{
+            margin-left: 500px;
+        }
+        body{
+            background-image: url('lib.png');
+            font-family: Arial;
+            background-color: black;
+        }
         div{
-            margin-top: 100px;
+            border: 3px solid white;
+            background-color: orange;
+            margin-left: 50px;
+            margin-top: 50px;
             display: flex;
             flex-direction: row;
             text-align: center;
-            color: rgb(245, 212, 179);
-            font-family: sans-serif;
-            font-weight: bold;
             padding: 30px;
             border-radius: 17px;
+            font-size: larger;
+        }
+        .btn{
+            border:none;
+            background-color: black;
+            color: white;
+            border-radius:50px;
+            padding: 20px 70px;
+            font-weight: bold;
+            font-size: large;
+            cursor: pointer;
+            margin-bottom: 30px;
+            border: 2px solid grey;
+        }
+        .btn:hover{
+            color: black;
+            border: 1px solid black;
+            background-color: rgb(204, 197, 197);
+        }
+        button{
+            background-color: rgb(240, 230, 230);
+            color: black;
+        }
+        .inputs{
+            font-size: 15px;
+            font-size: large;
+            padding: 12px;
+        }
+        p{
+            font-size: larger;
         }
         #lib{
-            margin-left: 300px;
-        }
-        #log{
-            background-color: black;
-            margin-left: 200px;
+            border:none;
+            margin-top: 200px;
+            font-weight: bolder;
         }
     </style>
     <div>
         <div id = "lib"><h1>PSG LIBRARY</h1></div>
-        <div>
+        <div id = "div2">
     <form action="" method = "POST" id="log">
         <h1>LOGIN PAGE</h1>
-        user name : <input type="text" name = "user"><p>
-        password : <input type="password" name = "pwd"><p>
+        <p>User name :</p> <input type="text" name = "user" class = "inputs"> <p>
+        <p>Password :</p> <input type="password" name = "pwd" class = "inputs"><p>
         {%csrf_token%}
-        <input type="submit">
+        <input type="submit" class = "btn">
         </div>
     </form>
     </div>

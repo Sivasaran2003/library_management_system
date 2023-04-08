@@ -8,15 +8,48 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        
+        body{
+            background-color: black;
+            color: orange;
+        }
+        h1{
+            text-align: center;
+        }
+        table,td{
+            border: 3px solid black;
+            border-collapse: collapse;
+            margin-left : 15px;
+            margin-top: 50px;
+            color: orange;
+            border:2px solid white
+        }
+        td{
+            padding: 20px 40px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        tr:hover{
+            background-color: white;
+            border:2px solid black;
+        }
+    
+        .header{
+            font-weight: bolder;
+            font-size: 25px;
+        }
+    </style>
     <table>
-        <th>
-        <td>USER ID</td>
-        <td>USER NAME</td>
-        <td>CONTACT NUMBER</td>
-        <td>NUMBER OF BOOKS BORROWED</td>
+        <h1>USER DETAILS</h1>
+        <tr>
+        <td class = "header">USER ID</td>
+        <td class = "header">USER NAME</td>
+        <td class = "header">CONTACT NUMBER</td>
+        <td class = "header">NUMBER OF BOOKS BORROWED</td>
+        </tr>
         {%for i in data%}
         <tr>
-            <td></td>
             <td>{{i.0}}</td>
             <td>{{i.1}}</td>
             <td>{{i.2}}</td>
@@ -26,13 +59,13 @@
     </table> <p>
         
         <table>
-            <th>
+            <tr>
             <td>USER ID</td>
             <td>ISBN NUMBER</td>
             <td>DUE DATE</td>
+            </tr>
             {%for i in borrowed%}
             <tr>
-                <td></td>
                 <td>{{i.0}}</td>
                 <td>{{i.1}}</td>
                 <td>{{i.2}}</td>

@@ -8,24 +8,60 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        body{
+            background-color: black;
+            color: orange;
+        }
+        h1{
+            text-align: center;
+        }
+        table,td{
+            border: 3px solid black;
+            border-collapse: collapse;
+            margin-left : 15px;
+            margin-top: 50px;
+            color: orange;
+            border:2px solid white
+        }
+        td{
+            padding: 20px 40px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        tr:hover{
+            background-color: white;
+            border:2px solid black;
+        }
+    
+        .header{
+            font-weight: bolder;
+            font-size: 25px;
+        }
+    </style>
+    <h1>BOOK DETAILS</h1>
     <table>
-        <th>
-        <td>ISBN</td>
-        <td>TITLE</td>
-        <td>PRICE</td>
-        <td>YEAR</td>
-        <td>PUBLICATION ID</td>
-        <td>AUTHOR</td>
-        <td>CATEGORY</td>
-        <td>AVAILABLE</td>
+        <tr class = "header">
+        <td class = "header">ISBN</td>
+        <td class = "header">TITLE</td>
+        <td class = "header">PRICE</td>
+        <td class = "header">YEAR</td>
+        <td class = "header">PUBLICATION ID</td>
+        <td class = "header">AUTHOR</td>
+        <td class = "header">CATEGORY</td>
+        <td class = "header">AVAILABLE</td>
+        </tr>
+
         {%for i in data%}
         <tr>
-            <td></td>
+
             {%for j in i%}
                <td> {{j}} </td>
             {%endfor%}
-          </tr>
-          {%endfor%}
+
+        </tr>
+        {%endfor%}
+
     </table>
 </body>
 </html>
