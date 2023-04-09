@@ -8,5 +8,6 @@ urlpatterns = [
     path('delete_book',views.delete_book),
     path('borrow',views.borrow),
     path('users',views.users),
-    path('return_book',views.return_book)
+    path('return_book',views.return_book),
+    path('add_user',views.add_user)
 ]

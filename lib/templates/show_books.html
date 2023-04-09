@@ -9,9 +9,10 @@
 </head>
 <body>
     <style>
-        body{
+        body,p{
             background-color: black;
             color: orange;
+            font-size: bold;
         }
         h1{
             text-align: center;
@@ -38,8 +39,26 @@
             font-weight: bolder;
             font-size: 25px;
         }
+        .btn:hover{
+            
+            border: 2px solid white;
+        }
+        .btn{
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            background-color: rgb(87, 87, 188);
+        }
     </style>
     <h1>BOOK DETAILS</h1>
+    <form action="show_books" method="POST">
+        <p>ISBN : </p> <input class = "inputs" type="text" name = "isbn"><p>
+        <p>STOCKS ARRIVED : </p> <input class = "inputs" type="text" name = "stock"><p>
+            {%csrf_token%}
+        <input class = "btn" type="submit" value="UPDATE"><p>
+    </form>
     <table>
         <tr class = "header">
         <td class = "header">ISBN</td>

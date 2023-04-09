@@ -23,7 +23,11 @@ def login(request):
     return render(request,'login.html')
 
 def show_books(request):
-    
+    if(request.method == 'POST'):
+        isbn = request.POST.get('isbn',False)
+        stock = request.POST.get('stock',False)
+        c.execute('update available set available = available + '+str(stock)+' where bookID = '+str(isbn))
+        print('update available set available = available + '+str(stock)+' where bookID = '+str(isbn))
     c.execute("select * from book")
     p = c.fetchall()
     p = list(p)
@@ -132,14 +136,12 @@ def return_book(request):
         print(fine)
         c.execute("delete from borrowed where userid = "+userid+" and bookID = "+isbn)
         c.execute("update available set available = available + 1 where bookID = "+isbn)
+        c.execute("update db.user set num_book = num_book - 1 where userID = "+userid)
         d['user'] = userid
         d['fine'] = fine
     return render(request,'return_book.html',d)
         
-# def update(request):
-#     if(request.method == 'POST'):
-        
-                  
+
 def users(request):
     d = {}
     c.execute("select * from user")
@@ -149,3 +151,16 @@ def users(request):
     borrowed = list(c.fetchall())
     d['borrowed'] = borrowed
     return render(request,'users.html',d)
+
+
+def add_user(request):
+    c.execute('select count(*) from user')
+    new_id = int(c.fetchall()[0][0]) + 101
+    d = {}
+    d['id_'] = new_id
+    if(request.method == 'POST'):
+        username = request.POST.get('name',False)
+        phno = request.POST.get('phno',False)
+        c.execute(f"insert into db.user values('"+str(new_id)+"','"+username+"','"+str(phno)+"',0)")
+        
+    return render(request,'add_user.html',d)

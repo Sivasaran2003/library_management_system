@@ -1,0 +1,86 @@
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .btn{
+            border:none;
+            background-color: black;
+            color: white;
+            border-radius:50px;
+            padding: 15px 50px;
+            font-weight: bold;
+            font-size: large;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        .btn:hover{
+            color: black;
+            border: 1px solid black;
+            background-color: rgb(204, 197, 197);
+        }
+         h1{
+            margin-left: 400px;
+        text-align: center;
+        width: 600px;
+    }
+        #div1{
+            padding: 0px 50px;
+            border: 2px solid rgb(42, 32, 32);
+            border-radius: 10px;
+            width: 500px;
+            text-align: center;
+            margin-bottom: 40px;
+            margin-left: 400px;
+            background-color: orange;
+        }
+        .inputs{
+            font-size: 15px;
+            font-size: large;
+            padding: 12px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+            font-size: large;
+            color: white;
+        }
+        .link{
+            margin-left: 180px;
+            background-color: green;
+            padding: 20px 20px;
+            height: 30px;
+            width: 100px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        body{
+            background-color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+    <h1 style="color:orange;">ADD NEW USER</h1>
+    <div id = "div1">
+        <form action="add_user" method = 'POST'>
+            <p>USER NAME : </p><input class = "inputs" type="text" name = "name"><p>
+            <p>USER ID : </p><input class = "inputs"  type="text"  value = "{{id_}}"><p>
+            <p>CONTACT NUMBER : </p><input class = "inputs"  type="text" name = "phno"><p>
+            <p>NUMBER OF BOOKS BORROWED : </p><input class = "inputs"  type="text" name = "num_books" value = "0"><p>
+            {%csrf_token%}
+            <input  class = "btn" type="submit" value = "ADD">
+            <div class = "link"><a href="users">SEE USERS</a></div>
+        </form>
+        
+</body>
+</html>
+{%endblock%}
