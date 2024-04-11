@@ -34,11 +34,11 @@ app1/views.py :
         database = "db"
     )
 - replace with your username, password and database name in the above file .
-- SQL Queries to be run before running the project has been given in the Models.py file inside app1 , copy and paste 
+- SQL Queries to be run before running the project. Queries has been given in the Models.py file inside app1 , copy and paste 
       it in the mySQL workbench sql editor and run it for the construction of necessary tables and relations .
-    (Though Django supports ORM [ Object Relational Mapping we have used traditional SQL database here ])
+    (Though Django supports ORM [ Object Relational Mapping ] we have used traditional SQL database here )
 
 **Running the project :**
-- After setting upt the database, open the cmd and type 'python manage.py runserver' and press enter
+- After setting up the database, open the cmd and type 'python manage.py runserver' and press enter
 - The current directory should be inside the project where app1 and manage.py files exists
 - Open your localhost, you can see the Library management system running .
