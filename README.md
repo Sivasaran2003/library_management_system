@@ -27,14 +27,14 @@ mySQL
 **Changes to be made in the code :**
 
 app1/views.py :
-    mydb = mysql.connector.connect(
+- mydb = mysql.connector.connect(
         host = "localhost",
         user = "root",
         password = "Sivasaran@2003",
         database = "db"
-    )   
-    - replace with your username, password and database name in the above file .
-    - SQL Queries to be run before running the project has been given in the Models.py file inside app1 , copy and paste 
+    )
+- replace with your username, password and database name in the above file .
+- SQL Queries to be run before running the project has been given in the Models.py file inside app1 , copy and paste 
       it in the mySQL workbench sql editor and run it for the construction of necessary tables and relations .
     (Though Django supports ORM [ Object Relational Mapping we have used traditional SQL database here ])
 
