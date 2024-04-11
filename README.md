@@ -1,6 +1,6 @@
 LIBRARY MANAGEMENT SYSTEM
 
-Languages used : 
+Technologies used :
 PYTHON 
 DJANGO
 HTML
@@ -17,3 +17,24 @@ Functionalities :
     - He can add new book or publisher or a new reader who wants to join the library
     - Can put an entry for the book borrowed for a particular reader who borrows the book and stores the due date
     - While the reader returns the book , admin can view the fine money
+
+Things needed to run our project :
+- Python : Install the latest version of python (Source : https://www.python.org/downloads/)
+- Django framework : Open cmd and run 'pip install django' after setting python globally
+- MySQL workbench : Install MySQL workn=bench and configure (Source : https://dev.mysql.com/downloads/file/?id=526408)
+
+Changes to be made in the code : 
+
+app1/views.py :
+mydb = mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        password = "Sivasaran@2003",
+        database = "db"
+    )
+
+    - replace with your username, password and database name in the above file
+    - SQL Queries to be run before running the project has been given in the Models.py file inside app1 , copy and paste 
+    it in the mySQL workbench sql editor and run it for the construction of necessary tables and relations
+    (Though Django supports ORM [Object Relational Mapping we have used traditional SQL databse here])
+    
